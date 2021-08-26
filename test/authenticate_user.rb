@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# This file is part of the Plugin Redmine Combination Matrix Field.
+# This file is part of the Plugin Redmine Table Calculation Inheritance.
 #
 # Copyright (C) 2021 Liane Hampe <liaham@xmera.de>, xmera.
 #
@@ -18,17 +18,35 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require 'redmine_matrix_field'
+module RedmineMatrixField
+  ##
+  # Provide user login test
+  #
+  module AuthenticateUser
+    def log_user(login, password)
+      login_page
+      log_user_in(login, password)
+      assert_equal login, User.find(user_session_id).login
+    end
 
-Redmine::Plugin.register :redmine_matrix_field do
-  name 'Combination Matrix Field'
-  author 'Liane Hampe'
-  description 'Combination matrix as computable custom field with colored background'
-  version '0.1.0'
-  url 'https://circle.xmera.de/projects/redmine-matrix-field'
-  author_url 'http://xmera.de'
+    module_function
 
-  requires_redmine version_or_higher: '4.2.1'
-  requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.0'
-  requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.1'
+    def login_page
+      User.anonymous
+      get '/login'
+      assert_nil user_session_id
+      assert_response :success
+    end
+
+    def user_session_id
+      session[:user_id]
+    end
+
+    def log_user_in(login, password)
+      post '/login', params: {
+        username: login,
+        password: password
+      }
+    end
+  end
 end

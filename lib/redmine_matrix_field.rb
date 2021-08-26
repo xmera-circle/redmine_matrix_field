@@ -19,6 +19,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # Extensions
-
 require 'redmine/field_format/combi_matrix_format'
-require 'redmine_matrix_field/overrides/computable_custom_field_formats_patch'
+
+# Overrides
+require 'redmine_matrix_field/overrides/custom_field_enumerations_controller_patch'
+
+module ComputableCustomField
+  module Configuration
+    self.formats += %w[combi_matrix]
+    self.formulas += %w[mapping]
+  end
+end
+
+Rails.configuration.to_prepare do
+  supported = ComputableCustomField::Configuration::Support.new(
+    format: 'combi_matrix',
+    formulas: %w[mapping]
+  )
+  base = supported.klass
+  base.supported_math_functions = supported.formulas
+end
