@@ -18,24 +18,22 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-module RedmineMatrixField
-  module Overrides
-    module ComputableCustomFieldFormatsPatch
-      def self.prepended(base)
-        base.singleton_class.prepend(ClassMethods)
-      end
+require File.expand_path('../../../test/test_helper', __dir__)
+require File.expand_path('../../../test/application_system_test_case', __dir__)
 
-      module ClassMethods
-        def formats
-          super.append('combi_matrix')
-        end
-      end
-    end
-  end
+require File.expand_path('authenticate_user', __dir__)
+require File.expand_path('fixtures_helper', __dir__)
+require File.expand_path('methods_helper', __dir__)
+
+class RedmineMatrixFieldUnitTestCase < ActiveSupport::TestCase
+  include Redmine::I18n
+  fixtures RedmineMatrixField::FixturesHelper.fixtures
+  include RedmineMatrixField::MethodsHelper
 end
 
-Rails.configuration.to_prepare do
-  patch = RedmineMatrixField::Overrides::ComputableCustomFieldFormatsPatch
-  klass = ComputableCustomField::Configuration
-  klass.prepend patch unless klass.included_modules.include?(patch)
+class RedmineMatrixFieldControllerTestCase < ActionDispatch::IntegrationTest
+  include Redmine::I18n
+  fixtures RedmineMatrixField::FixturesHelper.fixtures
+  include RedmineMatrixField::MethodsHelper
+  include RedmineMatrixField::AuthenticateUser
 end

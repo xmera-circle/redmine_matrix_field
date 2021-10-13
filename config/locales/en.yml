@@ -1,2 +1,6 @@
 en:
   label_field_format_combi_matrix: combination label_field_format_combi_matrix
+  text_supported_formulas: 'The formula min(), max(), sum(), product(), division(), 
+    custom() are supported. The combination matrix supports exclusively
+    the mapping(). Examples: sum(cfs[1], cfs[2]), mapping(cfs[1], cfs[2]),
+    custom(cfs[1] + cfs[2] * cfs[3])'

@@ -1,0 +1,5 @@
+<% if @custom_field.field_format == 'combi_matrix' %>
+  <%= hidden_field_tag "custom_field_enumerations[#{value.id}][x_index]", value.x_index %>
+  <%= hidden_field_tag "custom_field_enumerations[#{value.id}][y_index]", value.y_index %>
+  (<%= content_tag :span, value.x_index, class: 'x_index' %>, <%= content_tag :span, value.y_index, class: 'y_index' %>)
+<% end %>

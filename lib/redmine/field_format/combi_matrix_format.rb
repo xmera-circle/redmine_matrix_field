@@ -22,10 +22,9 @@ module Redmine
   module FieldFormat
     class CombiMatrixFormat < Redmine::FieldFormat::EnumerationFormat
       include ComputableCustomField::FieldFormatPatch
-
       add 'combi_matrix'
       self.form_partial = 'custom_fields/formats/combi_matrix'
-      self.supported_math_functions = %w[product]
+      self.supported_math_functions = %w[mapping]
 
       def label
         'label_field_format_combi_matrix'

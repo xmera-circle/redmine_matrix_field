@@ -18,17 +18,29 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require 'redmine_matrix_field'
+class MappingFunction < BaseFunction
+  def calculate
+    values
+    map = custom_field.enumerations.where(x_index: values[0], y_index: values[1]).take
+    map&.position
+  end
 
-Redmine::Plugin.register :redmine_matrix_field do
-  name 'Combination Matrix Field'
-  author 'Liane Hampe'
-  description 'Combination matrix as computable custom field with colored background'
-  version '0.1.0'
-  url 'https://circle.xmera.de/projects/redmine-matrix-field'
-  author_url 'http://xmera.de'
+  def available_operators
+    []
+  end
 
-  requires_redmine version_or_higher: '4.2.1'
-  requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.0'
-  requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.1'
+  def available_delimiters
+    %w[,]
+  end
+
+  def available_signs
+    []
+  end
+
+  ##
+  # Returning -1 means no restrictions.
+  #
+  def max_num_of_fields
+    2
+  end
 end
