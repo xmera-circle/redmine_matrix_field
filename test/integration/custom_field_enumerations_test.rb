@@ -28,19 +28,22 @@ module RedmineMatrixField
       y = field_with_enumeration_format(formula: nil)
       base = field_with_combi_matrix_format(formula: "mapping(cfs[#{x.id}], cfs[#{y.id}])")
       get custom_field_enumerations_path(base)
-      assert_select '.x_index', 81
-      assert_select '.y_index', 81
-      assert_select "input[type=hidden][name='custom_field_enumerations[][x_index]']", 81
-      assert_select "input[type=hidden][name='custom_field_enumerations[][y_index]']", 81
+
+      assert_select 'span.x_index', 81
+      assert_select 'span.y_index', 81
+      assert_select '#custom_field_enumerations' do |elements|
+        elements.each do |element|
+          assert_select element, 'li', 81
+        end
+      end
     end
 
     test 'should ignore matrix preparation unless field format combi_matrix' do
       field = field_with_enumeration_format(formula: nil)
       get custom_field_enumerations_path(field)
-      assert_select '.x_index', 0
-      assert_select '.y_index', 0
-      assert_select "input[type=hidden][name='custom_field_enumerations[][x_index]']", 0
-      assert_select "input[type=hidden][name='custom_field_enumerations[][y_index]']", 0
+      assert_select 'span.x_index', 0
+      assert_select 'span.y_index', 0
+      assert_select '#custom_field_enumerations', 0
     end
   end
 end
