@@ -2,7 +2,7 @@
 
 Combination matrix as computable custom field with colored background
 
-![Redmine Matrix Field Version](https://img.shields.io/badge/redmine_matrix_field_Plugin-v0.1.0-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-<development|release>-important)
+![Redmine Matrix Field Version](https://img.shields.io/badge/redmine_matrix_field_Plugin-v0.1.1-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-release-important)
 
 The Redmine Matrix Field plugin is a Redmine plugin. It displays computed results of combinations of two key/value custom fields and colores them as configured.
 
