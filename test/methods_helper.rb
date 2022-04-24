@@ -36,7 +36,7 @@ module RedmineMatrixField
 
     def field_with_list_format(formula:)
       computed_field 'list', attributes: { formula: formula,
-                                          possible_values: %w[1 2 3] }
+                                           possible_values: %w[1 2 3] }
     end
 
     def field_with_float_format(formula:)
