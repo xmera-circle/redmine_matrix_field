@@ -1,0 +1,5 @@
+<% if @custom_field.enumerations.none? %>
+  <%= tag.p class: 'nodata' do %>
+    <%= l(:label_no_data) %>
+  <% end %>
+<% end %>

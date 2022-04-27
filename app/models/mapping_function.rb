@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 class MappingFunction < BaseFunction
+  include Redmine::I18n
+
   def calculate
     values
     map = custom_field.enumerations.where(x_index: values[0], y_index: values[1]).take
