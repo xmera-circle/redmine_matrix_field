@@ -3,7 +3,7 @@
 #
 # Redmine plugin for xmera called Computable Custom Field Plugin.
 #
-# Copyright (C) 2021 - 2022 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2021 - 2022  Liane Hampe <liaham@xmera.de>, xmera.
 # Copyright (C) 2015 - 2021 Yakov Annikov
 #
 # This program is free software; you can redistribute it and/or
@@ -21,13 +21,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 module RedmineMatrixField
-  module FixturesHelper
-    def self.fixtures
-      %i[projects users email_addresses roles members member_roles
-         trackers projects_trackers enabled_modules issue_statuses issues
-         enumerations custom_fields custom_values custom_fields_trackers
-         watchers journals journal_details versions
-         workflows]
+  module CustomFieldsHelperPatch
+    def computed_by_default
+      super << 'combi_matrix'
     end
   end
+end
+
+Rails.configuration.to_prepare do
+  patch = RedmineMatrixField::CustomFieldsHelperPatch
+  klass = CustomFieldsHelper
+  klass.include patch unless klass.included_modules.include?(patch)
 end
