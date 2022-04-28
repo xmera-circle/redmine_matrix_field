@@ -2,7 +2,7 @@
 
 # This file is part of the Plugin Redmine Combination Matrix Field.
 #
-# Copyright (C) 2021 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2021 - 2022 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 class MappingFunction < BaseFunction
+  include Redmine::I18n
+
   def calculate
     values
     map = custom_field.enumerations.where(x_index: values[0], y_index: values[1]).take

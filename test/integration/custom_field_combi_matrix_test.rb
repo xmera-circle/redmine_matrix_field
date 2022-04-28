@@ -2,7 +2,7 @@
 
 # This file is part of the Plugin Redmine Combination Matrix Field.
 #
-# Copyright (C) 2021 - 2022 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2022 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,25 +18,19 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-# Extensions
-require 'redmine/field_format/combi_matrix_format'
+require File.expand_path('../test_helper', __dir__)
 
-# Overrides
-require 'redmine_matrix_field/overrides/custom_field_enumerations_controller_patch'
-require 'redmine_matrix_field/overrides/custom_fields_helper_patch'
+module RedmineMatrixField
+  class CustomFieldCombiMatrixTest < RedmineMatrixFieldControllerTestCase
+    test 'should set combi matrix field to calculation by default' do
+      log_user('admin', 'admin')
+      get new_custom_field_path, params: { type: 'IssueCustomField',
+                                           custom_field: { field_format: 'combi_matrix' } }
+      assert_response :success
 
-module ComputableCustomField
-  module Configuration
-    self.formats += %w[combi_matrix]
-    self.formulas += %w[mapping]
+      assert_select '#custom_field_field_format', 1
+      assert_select '#custom_field_is_computed', 1
+      assert_select 'input[type=checkbox][name=?][checked=checked][value=1]', 'custom_field[is_computed]'
+    end
   end
-end
-
-Rails.configuration.to_prepare do
-  supported = ComputableCustomField::Configuration::Support.new(
-    format: 'combi_matrix',
-    formulas: %w[mapping]
-  )
-  base = supported.klass
-  base.supported_math_functions = supported.formulas
 end
