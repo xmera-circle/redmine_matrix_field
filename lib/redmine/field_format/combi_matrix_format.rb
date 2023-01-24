@@ -21,7 +21,7 @@
 module Redmine
   module FieldFormat
     class CombiMatrixFormat < Redmine::FieldFormat::EnumerationFormat
-      include ComputableCustomField::FieldFormatPatch
+      include ComputableCustomField::Extensions::FieldFormatPatch
       add 'combi_matrix'
       self.form_partial = 'custom_fields/formats/combi_matrix'
       self.supported_math_functions = %w[mapping]

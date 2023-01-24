@@ -27,9 +27,3 @@ module RedmineMatrixField
     end
   end
 end
-
-Rails.configuration.to_prepare do
-  patch = RedmineMatrixField::CustomFieldsHelperPatch
-  klass = CustomFieldsHelper
-  klass.include patch unless klass.included_modules.include?(patch)
-end
