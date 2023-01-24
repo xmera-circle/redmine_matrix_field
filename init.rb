@@ -18,7 +18,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require 'redmine_matrix_field'
+require File.expand_path('lib/redmine_matrix_field', __dir__)
 
 Redmine::Plugin.register :redmine_matrix_field do
   name 'Combination Matrix Field'
@@ -29,6 +29,9 @@ Redmine::Plugin.register :redmine_matrix_field do
   author_url 'http://xmera.de'
 
   requires_redmine version_or_higher: '4.2.1'
+  # requires_redmine_plugin :advanced_plugin_helper, version_or_higher: '0.2.0'
   requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.0'
   requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.1'
 end
+
+RedmineMatrixField.setup
