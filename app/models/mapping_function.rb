@@ -23,7 +23,9 @@ class MappingFunction < BaseFunction
 
   def calculate
     values
+    # rubocop:disable Rails/FindBy
     map = custom_field.enumerations.where(x_index: values[0], y_index: values[1]).take
+    # rubocop:enable Rails/FindBy
     map&.position
   end
 
