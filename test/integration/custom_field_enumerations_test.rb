@@ -2,7 +2,7 @@
 
 # This file is part of the Plugin Redmine Combination Matrix Field.
 #
-# Copyright (C) 2021 - 2022 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2021-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@ module RedmineMatrixField
       log_user('admin', 'admin')
       x = field_with_enumeration_format(formula: nil)
       y = field_with_enumeration_format(formula: nil)
+
       base = field_with_combi_matrix_format(formula: "mapping(cfs[#{x.id}], cfs[#{y.id}])")
       get custom_field_enumerations_path(base)
 

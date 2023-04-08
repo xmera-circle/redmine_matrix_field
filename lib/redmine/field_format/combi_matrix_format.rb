@@ -2,7 +2,7 @@
 
 # This file is part of the Plugin Redmine Combination Matrix Field.
 #
-# Copyright (C) 2021 - 2022 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2021-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 module Redmine
   module FieldFormat
     class CombiMatrixFormat < Redmine::FieldFormat::EnumerationFormat
-      include ComputableCustomField::FieldFormatPatch
+      include ComputableCustomField::Extensions::FieldFormatPatch
       add 'combi_matrix'
       self.form_partial = 'custom_fields/formats/combi_matrix'
       self.supported_math_functions = %w[mapping]

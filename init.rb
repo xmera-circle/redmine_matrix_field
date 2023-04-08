@@ -2,7 +2,7 @@
 
 # This file is part of the Plugin Redmine Combination Matrix Field.
 #
-# Copyright (C) 2021 - 2022 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2021-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,17 +18,19 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require 'redmine_matrix_field'
+require File.expand_path('lib/redmine_matrix_field', __dir__)
 
 Redmine::Plugin.register :redmine_matrix_field do
   name 'Combination Matrix Field'
   author 'Liane Hampe'
   description 'Combination matrix as computable custom field with colored background'
-  version '0.1.2'
+  version '0.1.3'
   url 'https://circle.xmera.de/projects/redmine-matrix-field'
   author_url 'http://xmera.de'
 
   requires_redmine version_or_higher: '4.2.1'
-  requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.0'
-  requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.1'
+  requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.3'
+  requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.5'
 end
+
+RedmineMatrixField.setup
