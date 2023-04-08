@@ -99,13 +99,13 @@ module RedmineMatrixField
     #
     def computed_field_enumeration(is_computed: true, attributes: {})
       field = computed_field 'enumeration', is_computed: is_computed, attributes: attributes
-      field.save
+      field.save!
       field
     end
 
     def computed_field_combi_matrix(is_computed: true, attributes: {})
       field = computed_field 'combi_matrix', is_computed: is_computed, attributes: attributes
-      field.save
+      field.save!
       field
     end
 

@@ -2,7 +2,7 @@
 
 Combination matrix as computable custom field with colored background
 
-![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v0.1.2-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-release-important)
+![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v0.1.3-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v5.0.z-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-release-important) ![develop](https://github.com/xmera-circle/redmine_matrix_field/actions/workflows/5-0-stable.yml/badge.svg)
 
 The Redmine Matrix Field plugin is a Redmine plugin. It displays computed results of combinations of two key/value custom fields and colores them as configured.
 
@@ -13,6 +13,14 @@ The Redmine Matrix Field plugin is a Redmine plugin. It displays computed result
 ## Usage example
 
 For more examples and usage, please refer to the [official documentation](https://circle.xmera.de/projects/redmine-matrix-field/wiki).
+
+### Dependencies
+
+To run the plugin you need the following dependencies installed:
+
+* [Redmine 5.0.z](https://github.com/redmine/redmine)
+* [Redmine Colored Enumeration 0.1.3](https://github.com/xmera-circle/redmine_colored_enumeration)
+* [Redmine Computable Custom Field 3.0.5](https://github.com/xmera-circle/redmine_computable_custom_field)
 
 ## Installation
 

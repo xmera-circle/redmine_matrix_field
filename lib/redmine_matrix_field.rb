@@ -62,7 +62,7 @@ module RedmineMatrixField
 
     def custom_fields_helper_patch
       { klass: CustomFieldsHelper,
-        patch: RedmineMatrixField::CustomFieldsHelperPatch,
+        patch: RedmineMatrixField::Overrides::CustomFieldsHelperPatch,
         strategy: :prepend }
     end
 

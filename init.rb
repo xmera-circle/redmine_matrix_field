@@ -24,13 +24,13 @@ Redmine::Plugin.register :redmine_matrix_field do
   name 'Combination Matrix Field'
   author 'Liane Hampe'
   description 'Combination matrix as computable custom field with colored background'
-  version '0.1.2'
+  version '0.1.3'
   url 'https://circle.xmera.de/projects/redmine-matrix-field'
   author_url 'http://xmera.de'
 
   requires_redmine version_or_higher: '4.2.1'
-  requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.0'
-  requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.1'
+  requires_redmine_plugin :redmine_colored_enumeration, version_or_higher: '0.1.3'
+  requires_redmine_plugin :redmine_computable_custom_field, version_or_higher: '3.0.5'
 end
 
 RedmineMatrixField.setup

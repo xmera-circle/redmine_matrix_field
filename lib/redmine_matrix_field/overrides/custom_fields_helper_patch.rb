@@ -21,9 +21,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 module RedmineMatrixField
-  module CustomFieldsHelperPatch
-    def computed_by_default
-      super << 'combi_matrix'
+  module Overrides
+    module CustomFieldsHelperPatch
+      def computed_by_default
+        super << 'combi_matrix'
+      end
     end
   end
 end
