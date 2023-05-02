@@ -64,34 +64,35 @@ jobs:
     env:
       RAILS_ENV: test
       NAME: redmine_matrix_field
+      WORKING_DIRECTORY: ./redmine
     steps:
       - name: Clone Redmine
         # Get the latest stable Redmine
-        run: svn export http://svn.redmine.org/redmine/branches/5.0-stable/ redmine
+        run: svn export http://svn.redmine.org/redmine/branches/5.0-stable/ ${{ env.WORKING_DIRECTORY }}
       - name: Checkout dependencies - Base Deface
         uses: actions/checkout@v3
         with:
           repository: xmera-circle/redmine_base_deface
-          path: redmine/plugins/redmine_base_deface
+          path: ${{ env.WORKING_DIRECTORY }}/plugins/redmine_base_deface
       - name: Checkout dependencies - Advanced Plugin Helper
         uses: actions/checkout@v3
         with:
           repository: xmera-circle/advanced_plugin_helper
-          path: redmine/plugins/advanced_plugin_helper
+          path: ${{ env.WORKING_DIRECTORY }}/plugins/advanced_plugin_helper
       - name: Checkout dependencies - Colored Enumeration
         uses: actions/checkout@v3
         with:
           repository: xmera-circle/redmine_colored_enumeration
-          path: redmine/plugins/redmine_colored_enumeration
+          path: ${{ env.WORKING_DIRECTORY }}/plugins/redmine_colored_enumeration
       - name: Checkout dependencies - Computable Custom Field
         uses: actions/checkout@v3
         with:
           repository: xmera-circle/redmine_computable_custom_field
-          path: redmine/plugins/redmine_computable_custom_field
+          path: ${{ env.WORKING_DIRECTORY }}/plugins/redmine_computable_custom_field
       - name: Checkout plugin
         uses: actions/checkout@v3
         with:
-          path: redmine/plugins/${{ env.NAME }}
+          path: ${{ env.WORKING_DIRECTORY }}/plugins/${{ env.NAME }}
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -110,6 +111,9 @@ jobs:
             ${{matrix.database_command}} "${{matrix.sql3}}"
           fi
       - name: Install Redmine
+        env:
+          REDMINE_LANG: en      
+        working-directory: ${{ env.WORKING_DIRECTORY }}      
         # Install Redmine
         run: |
           echo "gem \"webrick\"" > Gemfile.local          
@@ -119,12 +123,9 @@ jobs:
           bundle exec rake db:migrate
           bundle exec rake redmine:plugins:migrate
           bundle exec rake redmine:load_default_data
-        env:
-          REDMINE_LANG: en
-        working-directory: redmine
       - name: Standard plugin tests
         # Run the tests
-        working-directory: redmine
+        working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
           bundle exec rake redmine:plugins:test:units
           bundle exec rake redmine:plugins:test:functionals
@@ -132,7 +133,7 @@ jobs:
       - name: Cleanup
         # Rollback plugin's changes to the database
         # Stop the database engine
-        working-directory: redmine
+        working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
           bundle exec rake redmine:plugins:migrate VERSION=0
           if [[ "${{matrix.database_service}}" ]]; then
