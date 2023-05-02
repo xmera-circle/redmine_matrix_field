@@ -85,7 +85,7 @@ module RedmineMatrixField
       enumerations = attributes.delete(:enumerations)
       params = attributes.merge(name: name, is_computed: is_computed,
                                 field_format: format, is_for_all: true)
-      field = IssueCustomField.create params
+      field = IssueCustomField.new params
       field.trackers << Tracker.first if field.is_a? IssueCustomField
       field.save!
       add_enumerations(field, enumerations)
