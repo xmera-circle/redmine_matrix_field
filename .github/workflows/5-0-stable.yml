@@ -126,9 +126,9 @@ jobs:
         # Run the tests
         working-directory: redmine
         run: |
-          bundle exec rake redmine:plugins:test:units
-          bundle exec rake redmine:plugins:test:functionals
-          bundle exec rake redmine:plugins:test:integration
+          bundle exec rake redmine:plugins:test:units NAME=${{ env.NAME }}
+          bundle exec rake redmine:plugins:test:functionals NAME=${{ env.NAME }}
+          bundle exec rake redmine:plugins:test:integration NAME=${{ env.NAME }}
       - name: Cleanup
         # Rollback plugin's changes to the database
         # Stop the database engine
