@@ -19,11 +19,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # Extensions
-require_relative 'redmine/field_format/combi_matrix_format'
+require File.expand_path('redmine/field_format/combi_matrix_format', __dir__)
 
 # Overrides
-require_relative 'redmine_matrix_field/overrides/custom_field_enumerations_controller_patch'
-require_relative 'redmine_matrix_field/overrides/custom_fields_helper_patch'
+require File.expand_path('redmine_matrix_field/overrides/custom_field_enumerations_controller_patch', __dir__)
+require File.expand_path('redmine_matrix_field/overrides/custom_fields_helper_patch', __dir__)
 
 module ComputableCustomField
   ##
